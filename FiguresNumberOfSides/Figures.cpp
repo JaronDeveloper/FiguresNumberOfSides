@@ -2,31 +2,58 @@
 
 class Figures
 {
+protected:
+	int sides_count;
+	std::string name;
 public:	
-	Figures();
-	Figures(int Edge,std :: string NameFigures) {
-		std::cout << NameFigures << Edge << std ::endl;
+	virtual int get_sides_coun() {
+		return sides_count;
+	}
+
+	virtual std::string getType() {
+		return name;
 	}
 };
 
-class UnknownFigures : public Figures {	
+void print_info(Figures* f) {
+	std::cout << f->getType();
+	std::cout << f->get_sides_coun() << std::endl;
+}
+
+class UnknownFigures : public Figures{	
+public:	
+	std::string NameFigures = "Фигура:";	 
+
+	int get_sides_coun()override {
+		 return sides_count = 0;
+	 }
+
+	 std::string getType() override {
+		 return NameFigures;
+	 }
+};
+
+class Triangle:public Figures {
 public:
-	 UnknownFigures(){
-		Figures(0, "Фигура: ");
+	std::string NameFigures = "Треугольник:";
+	
+	int get_sides_coun()override {
+		return sides_count = 3;
+	}
+	std::string getType() override {
+		return NameFigures;
 	}
 };
 
-class Triangle : public Figures {
+class Quadrilateral:public Figures {
 public:
-	Triangle() {
-		Figures(3, "Треугольник: ");
+	std::string NameFigures = "Четырёхугольник:";
+	
+	int get_sides_coun()override {
+		return sides_count = 4;
 	}
-};
-
-class Quadrilateral : public Figures {
-public:
-	Quadrilateral() {
-		Figures(4, "Четырёхугольник: ");
+	std::string getType() override {
+		return NameFigures;
 	}
 };
 
@@ -35,9 +62,14 @@ int main() {
 
 	std::cout << "Количество сторон: " << std::endl;
 
-	UnknownFigures();
-	Triangle();
-	Quadrilateral();
+	Figures* unknownFigures = new UnknownFigures();
+	print_info(unknownFigures);
+
+	Figures* triangle = new Triangle();
+	print_info(triangle);
+
+	Figures* quadrilateral = new Quadrilateral();
+	print_info(quadrilateral);
 
 	return 0;
 }
