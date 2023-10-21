@@ -64,12 +64,15 @@ int main() {
 
 	Figures* unknownFigures = new UnknownFigures();
 	print_info(unknownFigures);
+	delete unknownFigures;
 
 	Figures* triangle = new Triangle();
 	print_info(triangle);
+	delete triangle;
 
 	Figures* quadrilateral = new Quadrilateral();
 	print_info(quadrilateral);
+	delete quadrilateral;
 
 	return 0;
 }
